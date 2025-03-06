@@ -34,8 +34,9 @@ public class Singleton {
         return instance;
     }
 }
-•	Pros: Simple and thread-safe.
-•	Cons: Instance created even if not needed.
+
+-	Pros: Simple and thread-safe
+-	Cons: Instance created even if not needed
 ________________________________________
 2. Lazy Initialization Singleton
 The instance is created only when it is requested.
@@ -52,8 +53,9 @@ public class Singleton {
         return instance;
     }
 }
-•	Pros: Instance created only when needed.
-•	Cons: Not thread-safe.
+
+-	Pros: Instance created only when needed.
+-	Cons: Not thread-safe.
 ________________________________________
 3. Thread-Safe Singleton (Synchronized Method)
 public class Singleton {
@@ -69,8 +71,8 @@ public class Singleton {
         return instance;
     }
 }
-•	Pros: Thread-safe.
-•	Cons: Performance overhead due to synchronization.
+-	Pros: Thread-safe.
+-	Cons: Performance overhead due to synchronization.
 ________________________________________
 4. Double-Checked Locking (Best Practice for Singleton)
 This reduces the overhead of synchronization after the instance is initialized.
@@ -91,8 +93,8 @@ public class Singleton {
         return instance;
     }
 }
-•	Pros: Thread-safe and high performance.
-•	Cons: More complex code.
+-	Pros: Thread-safe and high performance.
+-	Cons: More complex code.
 ________________________________________
 5. Bill Pugh Singleton (Recommended)
 This approach uses a static inner class to hold the instance.
@@ -108,8 +110,8 @@ public class Singleton {
         return SingletonHelper.INSTANCE;
     }
 }
-•	Pros: Thread-safe, lazy-loaded, and clean.
-•	Cons: None.
+-	Pros: Thread-safe, lazy-loaded, and clean.
+-	Cons: None.
 ________________________________________
 6. Enum Singleton (Most Preferred)
 Since Enums are thread-safe by design and prevent multiple instantiation, this is the simplest and safest method.
@@ -120,8 +122,8 @@ public enum Singleton {
         System.out.println("Singleton using Enum");
     }
 }
-•	Pros: Thread-safe, lazy-loaded, serialization-safe.
-•	Cons: Enum cannot extend another class.
+-	Pros: Thread-safe, lazy-loaded, serialization-safe.
+-	Cons: Enum cannot extend another class.
 ________________________________________
 
 # Which One to Use?
