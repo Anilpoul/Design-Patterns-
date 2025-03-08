@@ -1,14 +1,22 @@
-# FACTORY DESIGN PATTERN: 
-The Factory Design Pattern is a creational pattern that provides an interface for creating objects but allows subclasses to alter the type of objects that will be created. 
-It promotes loose coupling by encapsulating the object creation logic.
-________________________________________
-# Implementation of Factory Design Pattern in Java
-Here's a simple example using a Shape interface and its implementations (Circle, Rectangle, and Square). A ShapeFactory class will be responsible for creating objects.
-Step 1: Create the Shape Interface
+# **Factory Design Pattern in Java**
+
+The **Factory Design Pattern** is a creational pattern that provides an interface for creating objects but allows subclasses to alter the type of objects that will be created. It promotes loose coupling by encapsulating the object creation logic.
+
+---
+
+## **Implementation of Factory Design Pattern in Java**
+
+Here's a simple example using a `Shape` interface and its implementations (`Circle`, `Rectangle`, and `Square`). A `ShapeFactory` class will be responsible for creating objects.
+
+### **Step 1: Create the `Shape` Interface**
+```java
 public interface Shape {
     void draw();
 }
-Step 2: Implement the Interface in Different Classes
+```
+
+### **Step 2: Implement the Interface in Different Classes**
+```java
 public class Circle implements Shape {
     @Override
     public void draw() {
@@ -29,7 +37,10 @@ public class Square implements Shape {
         System.out.println("Drawing a Square");
     }
 }
-Step 3: Create the Factory Class
+```
+
+### **Step 3: Create the Factory Class**
+```java
 public class ShapeFactory {
     public Shape getShape(String shapeType) {
         if (shapeType == null) {
@@ -45,7 +56,10 @@ public class ShapeFactory {
         return null;
     }
 }
-Step 4: Use the Factory in a Client Code
+```
+
+### **Step 4: Use the Factory in Client Code**
+```java
 public class FactoryPatternDemo {
     public static void main(String[] args) {
         ShapeFactory shapeFactory = new ShapeFactory();
@@ -60,13 +74,19 @@ public class FactoryPatternDemo {
         shape3.draw();
     }
 }
-________________________________________
-Breaking Ways and Solutions
-1. Tight Coupling (Breaking Dependency Inversion)
-•	The ShapeFactory class directly instantiates concrete classes (Circle, Rectangle, Square).
-•	This makes the factory inflexible to adding new shapes.
-Solution: Use Reflection or Dynamic Binding
-Modify ShapeFactory to avoid direct class dependencies.
+```
+
+---
+
+## **Breaking Ways and Solutions**
+
+### **1. Tight Coupling (Breaking Dependency Inversion)**
+- The `ShapeFactory` class directly instantiates concrete classes (`Circle`, `Rectangle`, `Square`).
+- This makes the factory inflexible to adding new shapes.
+
+#### **Solution: Use Reflection or Dynamic Binding**
+Modify `ShapeFactory` to avoid direct class dependencies.
+```java
 public class ShapeFactory {
     public Shape getShape(Class<? extends Shape> shapeClass) {
         try {
@@ -77,18 +97,29 @@ public class ShapeFactory {
         return null;
     }
 }
-Usage:
+```
+
+**Usage:**
+```java
 ShapeFactory factory = new ShapeFactory();
 Shape circle = factory.getShape(Circle.class);
 circle.draw();
-________________________________________
-2. Hardcoded Strings (String Dependency)
-•	Using "CIRCLE", "RECTANGLE", etc., can lead to typos and debugging issues.
-Solution: Use Enums
+```
+
+---
+
+### **2. Hardcoded Strings (String Dependency)**
+- Using `"CIRCLE"`, `"RECTANGLE"`, etc., can lead to typos and debugging issues.
+
+#### **Solution: Use Enums**
+```java
 public enum ShapeType {
     CIRCLE, RECTANGLE, SQUARE
 }
-Modify ShapeFactory:
+```
+
+Modify `ShapeFactory`:
+```java
 public class ShapeFactory {
     public Shape getShape(ShapeType type) {
         switch (type) {
@@ -99,13 +130,21 @@ public class ShapeFactory {
         }
     }
 }
-Usage:
+```
+
+**Usage:**
+```java
 Shape shape = factory.getShape(ShapeType.CIRCLE);
 shape.draw();
-________________________________________
-3. Extending Factory Without Modifying It (Open/Closed Principle Violation)
-•	When adding new shapes, we modify ShapeFactory, violating OCP.
-Solution: Use a Registry-Based Factory
+```
+
+---
+
+### **3. Extending Factory Without Modifying It (Open/Closed Principle Violation)**
+- When adding new shapes, we modify `ShapeFactory`, violating OCP.
+
+#### **Solution: Use a Registry-Based Factory**
+```java
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -131,14 +170,24 @@ public class ShapeFactory {
         throw new IllegalArgumentException("Unknown shape type");
     }
 }
-Now, new shapes can be added without modifying ShapeFactory:
+```
+
+Now, new shapes can be added without modifying `ShapeFactory`:
+```java
 ShapeFactory.registerShape(ShapeType.TRIANGLE, Triangle::new);
-________________________________________
-Conclusion
-The Factory Design Pattern is useful for decoupling object creation logic from the client. However, it can be improved by:
-1.	Avoiding direct instantiation using reflection.
-2.	Using enums instead of hardcoded strings.
-3.	Implementing a registry-based factory for better extensibility.
+```
+
+---
+
+## **Conclusion**
+
+The **Factory Design Pattern** is useful for decoupling object creation logic from the client. However, it can be improved by:
+
+1. Avoiding direct instantiation using reflection.
+2. Using enums instead of hardcoded strings.
+3. Implementing a registry-based factory for better extensibility.
+
+Would you like me to add a more advanced example, such as an **Abstract Factory Pattern** or **Dependency Injection** integration? 🚀
 
 
 
